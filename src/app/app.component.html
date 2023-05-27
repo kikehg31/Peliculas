@@ -1,0 +1,42 @@
+
+<div class="container">
+  <div class="row align-items-md-stretch">
+    <div class="col-md-12">
+      <div class="h-100 p-4 text-white bg-dark rounded-3 text-center">
+        <h3>Peliculas</h3><i class="bi bi-film"></i>
+        <!--<h2>{{pelicula.title}}</h2><img [src]="'https://image.tmdb.org/t/p/w500' + pelicula.poster_path" alt="{{ pelicula.title }}">-->
+        <form (ngSubmit)="onSubmit()">
+          <div class="input-group mb-4">
+
+            <input class="form-control" placeholder="Ingrese el título a buscar" type="text" id="nombre" name="nombre" [(ngModel)]="formData.title" required>
+            <button class="btn btn-outline-secondary" type="submit">Enviar</button>
+          </div>
+        </form>
+        <div class="contenedor-peliculas">
+          <div class="pelicula" *ngFor="let peli of peliculas">
+            {{ peli.title }} <br>
+            <img [src]="'https://image.tmdb.org/t/p/w500' + peli.poster_path" alt="{{ peli.title }}" width="50" height="50"><br>
+            <button class="detalles" (click)="info(peli.id)" class="btn btn-primary">Detalles</button>
+          </div>
+        </div>
+        <button (click)="beforePage()" class="btn btn-primary">Anterior</button>
+        <button (click)="nextPage()" class="btn btn-primary">Siguiente</button>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+<div class="cart-container" *ngIf="mostrarDetalle">
+  <div class="inf" *ngFor="let key of keysArray">
+    <li *ngIf="key == 'original_title'"> Original title: {{ pelicula[key] }} </li>
+    <li *ngIf="key == 'overview'"> Overview: {{ pelicula[key] }} </li>
+    <li *ngIf="key == 'popularity'"> Popularity:  {{ pelicula[key] }} </li>
+    <li *ngIf="key == 'vote_average'"> Vote Average: {{ pelicula[key] }}/10 </li>
+  </div>
+  <button class="close-button btn btn-danger" (click)="mostrarDetalle = false">Cerrar</button>
+</div>
+
+
+
